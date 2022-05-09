@@ -4,4 +4,4 @@
 - tensorflow 2.0 
 - transfer learning
 # 最终最好成绩
-- 0.03694
+- ![0.03694](https://github.com/su-xiaoman/Kaggle-Dogs-vs-Cats-/blob/main/best_result.png)
