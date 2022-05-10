@@ -4,4 +4,9 @@
 - tensorflow 2.0 
 - transfer learning
 # 最终最好成绩
-- ![0.03694](https://github.com/su-xiaoman/Kaggle-Dogs-vs-Cats-/blob/main/best_result.png)
+- ![0.03694](https://github.com/su-xiaoman/Tensorflow-For-Kaggle-Dogs-vs-Cats/blob/main/best_result.png)
+
+
+#更新1
+- 加入了传统的xgboost和logistic回归
+- 最好成绩 ![0.02983](https://github.com/su-xiaoman/Tensorflow-For-Kaggle-Dogs-vs-Cats/blob/main/加上机器学习.png)
