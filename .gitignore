@@ -1,8 +1,15 @@
 # directory
-cats_and_dogs/
+
+# myself version
+pretrained_model/
 train/
 test/
-pretrained_model/
+
+#group version
+cats_and_dogs/
+train1/
+test1/
 
 # file
 .DS_Store
+main.py
