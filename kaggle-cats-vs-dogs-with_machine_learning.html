@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>kaggle-cats-vs-dogs-best</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>kaggle-cats-vs-dogs-with_machine_learning</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14572,12 +14572,23 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="%E5%BA%93%E5%AE%89%E8%A3%85">&#24211;&#23433;&#35013;<a class="anchor-link" href="#%E5%BA%93%E5%AE%89%E8%A3%85">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[87]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install pandas
@@ -14657,7 +14668,7 @@ Tue May 10 20:56:24 2022
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -14674,9 +14685,10 @@ Tue May 10 20:56:24 2022
 <span class="kn">from</span> <span class="nn">tensorflow.keras.applications</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">,</span><span class="n">KFold</span><span class="p">,</span><span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span><span class="p">,</span> <span class="n">roc_auc_score</span>
-
+<span class="kn">from</span> <span class="nn">keras.wrappers.scikit_learn</span> <span class="kn">import</span> <span class="n">KerasClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">VotingClassifier</span><span class="p">,</span><span class="n">RandomForestClassifier</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
@@ -14694,18 +14706,6 @@ Tue May 10 20:56:24 2022
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>2022-05-10 19:22:31.053396: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
-</pre>
-</div>
-</div>
 
 <div class="jp-OutputArea-child">
 
@@ -14739,7 +14739,7 @@ Tue May 10 20:56:24 2022
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#定义读取测试提交格式</span>
@@ -14832,7 +14832,7 @@ sampling from test label: [2345, 170, 5378, 11242, 3465]
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">train_EB7_ns</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -14881,30 +14881,51 @@ sampling from test label: [2345, 170, 5378, 11242, 3465]
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[73]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#调用神经网络</span>
+<span class="k">def</span> <span class="nf">create_model</span><span class="p">():</span>
+    <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">EB7_X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">input_tensor</span>
+    <span class="c1"># x = BatchNormalization()(x)</span>
+    <span class="c1"># x = LayerNormalization()(x)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="c1"># x = Dense(1024,activation=&#39;relu&#39;,kernel_regularizer=keras.regularizers.l2(1e-3))(x) #加上一层全连接并不能加大准确率</span>
+    <span class="c1"># x = Dropout(0.2)(x)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="c1">#in Model(first_layer,last_layer)    </span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">),</span>
+                  <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">BinaryCrossentropy</span><span class="p">(),</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[74]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#调用神经网络</span>
-<span class="n">input_tensor</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">EB7_X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">input_tensor</span>
-<span class="c1"># x = BatchNormalization()(x)</span>
-<span class="c1"># x = LayerNormalization()(x)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
-<span class="c1"># x = Dense(1024,activation=&#39;relu&#39;,kernel_regularizer=keras.regularizers.l2(1e-3))(x) #加上一层全连接并不能加大准确率</span>
-<span class="c1"># x = Dropout(0.2)(x)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
-<span class="c1">#in Model(first_layer,last_layer)    </span>
-<span class="n">model1</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-
-<span class="n">model1</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">),</span>
-              <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">BinaryCrossentropy</span><span class="p">(),</span>
-<span class="c1">#               metrics=[&#39;binary_accuracy&#39;],</span>
-              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">eb7_nn_model</span> <span class="o">=</span> <span class="n">KerasClassifier</span><span class="p">(</span><span class="n">build_fn</span><span class="o">=</span><span class="n">create_model</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">eb7_nn_model</span><span class="o">.</span><span class="n">_estimator_type</span> <span class="o">=</span> <span class="s2">&quot;classifier&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------model1 training-----------&quot;</span><span class="p">)</span>
+<span class="c1"># eb7_nn_model.fit(EB7_X_train, EB7_y_train)  </span>
+<span class="n">eb7_nn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">EB7_X_train</span><span class="p">,</span><span class="n">EB7_y_train</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14926,62 +14947,115 @@ sampling from test label: [2345, 170, 5378, 11242, 3465]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>2022-05-10 19:23:08.015152: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcuda.so.1
-2022-05-10 19:23:08.017213: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
-pciBusID: 0000:41:00.0 name: NVIDIA RTX A5000 computeCapability: 8.6
-coreClock: 1.695GHz coreCount: 64 deviceMemorySize: 23.69GiB deviceMemoryBandwidth: 715.34GiB/s
-2022-05-10 19:23:08.017256: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
-2022-05-10 19:23:08.029429: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcublas.so.11
-2022-05-10 19:23:08.029504: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcublasLt.so.11
-2022-05-10 19:23:08.035060: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcufft.so.10
-2022-05-10 19:23:08.037663: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcurand.so.10
-2022-05-10 19:23:08.040081: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcusolver.so.11
-2022-05-10 19:23:08.042683: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcusparse.so.11
-2022-05-10 19:23:08.042871: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudnn.so.8
-2022-05-10 19:23:08.044608: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1871] Adding visible gpu devices: 0
-2022-05-10 19:23:08.045545: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2022-05-10 19:23:08.054156: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
-pciBusID: 0000:41:00.0 name: NVIDIA RTX A5000 computeCapability: 8.6
-coreClock: 1.695GHz coreCount: 64 deviceMemorySize: 23.69GiB deviceMemoryBandwidth: 715.34GiB/s
-2022-05-10 19:23:08.054995: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1871] Adding visible gpu devices: 0
-2022-05-10 19:23:08.055543: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
-2022-05-10 19:23:08.787923: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
-2022-05-10 19:23:08.787962: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      0 
-2022-05-10 19:23:08.787970: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1277] 0:   N 
-2022-05-10 19:23:08.789835: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1418] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 21250 MB memory) -&gt; physical GPU (device: 0, name: NVIDIA RTX A5000, pci bus id: 0000:41:00.0, compute capability: 8.6)
+<pre>/var/folders/yv/s4flsz3j48qbnmr0r8hsb2480000gn/T/ipykernel_83980/2125861974.py:1: DeprecationWarning: KerasClassifier is deprecated, use Sci-Keras (https://github.com/adriangb/scikeras) instead. See https://www.adriangb.com/scikeras/stable/migration.html for help migrating.
+  eb7_nn_model = KerasClassifier(build_fn=create_model,verbose=1,epochs=20,batch_size=256)
 </pre>
 </div>
 </div>
 
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>------model1 training-----------
+Epoch 1/20
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>2022-05-12 21:29:26.196406: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:113] Plugin optimizer for device_type GPU is enabled.
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>88/88 [==============================] - 1s 6ms/step - loss: 0.1959 - accuracy: 0.9745
+Epoch 2/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0476 - accuracy: 0.9976
+Epoch 3/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0284 - accuracy: 0.9980
+Epoch 4/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0205 - accuracy: 0.9982
+Epoch 5/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0166 - accuracy: 0.9979
+Epoch 6/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0143 - accuracy: 0.9980
+Epoch 7/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0124 - accuracy: 0.9981
+Epoch 8/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0111 - accuracy: 0.9980
+Epoch 9/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0104 - accuracy: 0.9980
+Epoch 10/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0098 - accuracy: 0.9981
+Epoch 11/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0091 - accuracy: 0.9982
+Epoch 12/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0083 - accuracy: 0.9982
+Epoch 13/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0081 - accuracy: 0.9984
+Epoch 14/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0076 - accuracy: 0.9984
+Epoch 15/20
+88/88 [==============================] - 0s 6ms/step - loss: 0.0071 - accuracy: 0.9986
+Epoch 16/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0071 - accuracy: 0.9984
+Epoch 17/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0069 - accuracy: 0.9984
+Epoch 18/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0068 - accuracy: 0.9985
+Epoch 19/20
+88/88 [==============================] - 0s 6ms/step - loss: 0.0066 - accuracy: 0.9986
+Epoch 20/20
+88/88 [==============================] - 0s 6ms/step - loss: 0.0063 - accuracy: 0.9986
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[74]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&lt;keras.callbacks.History at 0x3207e8c40&gt;</pre>
 </div>
 
 </div>
 
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>batch_size = 256
-print("------model1 training-----------")
-model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 
 </div>
-</div>
-</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[75]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---------model1 evaluating-----</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">nn_pred1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">EB7_X_val</span><span class="p">)</span>
+<span class="n">nn_pred1</span> <span class="o">=</span> <span class="n">eb7_nn_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">EB7_X_val</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">EB7_y_val</span><span class="p">,</span> <span class="n">nn_pred1</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">log_loss</span><span class="p">(</span><span class="n">EB7_y_val</span><span class="p">,</span> <span class="n">nn_pred1</span><span class="p">))</span>
 
@@ -14989,7 +15063,8 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <span class="c1"># 0.9999718398377975</span>
 <span class="c1"># 0.008397303281173026</span>
 
-<span class="n">test_preds_nn1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_EB7_ns</span><span class="p">)</span>
+<span class="c1"># 神经网络模型模型预测</span>
+<span class="n">test_preds_nn1</span> <span class="o">=</span> <span class="n">eb7_nn_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_EB7_ns</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">test_preds_nn1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
@@ -15014,9 +15089,32 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>---------model1 evaluating-----
 
-0.9999737598488568
-0.008180712779016221
-(12500, 1)
+0.9999807998894074
+0.006227655189844563
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>2022-05-12 21:29:38.744763: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:113] Plugin optimizer for device_type GPU is enabled.
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>(12500,)
 </pre>
 </div>
 </div>
@@ -15030,12 +15128,15 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[76]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#调用模型logistic回归</span>
 <span class="n">EB7_lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">0.026</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">EB7_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">EB7_X_train</span><span class="p">,</span> <span class="n">EB7_y_train</span><span class="p">)</span>
+<span class="c1"># EB7_lr.fit(EB7_X_train, EB7_y_train)</span>
+<span class="n">EB7_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_EB7_ns</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+
+
 <span class="n">val_preds_EB7_lr</span> <span class="o">=</span> <span class="n">EB7_lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">EB7_X_val</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">test_preds_EB7_lr</span> <span class="o">=</span> <span class="n">EB7_lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_EB7_ns</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
@@ -15069,8 +15170,8 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>(12500,)
-0.999992319955763
-0.008745738095360568
+0.9999980799889407
+0.007350718572358875
 </pre>
 </div>
 </div>
@@ -15084,7 +15185,7 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[92]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 定义xgb参数并构造训练样本</span>
@@ -15122,9 +15223,9 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 模型xgboost训练并预测</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">xgb_params1</span><span class="p">,</span> <span class="n">dtrain1</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">val_preds_xgb_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dval1</span><span class="p">)</span>
-<span class="n">test_preds_xgb_1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest1</span><span class="p">)</span>
+<span class="n">eb7_xgb_model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">xgb_params1</span><span class="p">,</span> <span class="n">dtrain1</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">val_preds_xgb_1</span> <span class="o">=</span> <span class="n">eb7_xgb_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dval1</span><span class="p">)</span>
+<span class="n">test_preds_xgb_1</span> <span class="o">=</span> <span class="n">eb7_xgb_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">test_preds_xgb_1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="c1">#输出指标</span>
@@ -15222,7 +15323,7 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">EB4_X_train</span><span class="p">,</span> <span class="n">EB4_X_val</span><span class="p">,</span> <span class="n">EB4_y_train</span><span class="p">,</span> <span class="n">EB4_y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train_EB4_ns</span><span class="p">,</span> 
@@ -15276,25 +15377,27 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[79]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#神经网络模型</span>
-<span class="n">input_tensor</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">EB4_X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">input_tensor</span>
-<span class="c1"># x = BatchNormalization()(x)</span>
-<span class="c1"># x = LayerNormalization()(x)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
-<span class="c1"># x = Dense(1024,activation=&#39;relu&#39;,kernel_regularizer=keras.regularizers.l2(1e-3))(x) #加上一层全连接并不能加大准确率</span>
-<span class="c1"># x = Dropout(0.2)(x)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
-<span class="c1">#in Model(first_layer,last_layer)    </span>
-<span class="n">model2</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_model</span><span class="p">():</span>
+    <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">EB4_X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">input_tensor</span>
+    <span class="c1"># x = BatchNormalization()(x)</span>
+    <span class="c1"># x = LayerNormalization()(x)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="c1"># x = Dense(1024,activation=&#39;relu&#39;,kernel_regularizer=keras.regularizers.l2(1e-3))(x) #加上一层全连接并不能加大准确率</span>
+    <span class="c1"># x = Dropout(0.2)(x)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="c1">#in Model(first_layer,last_layer)    </span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
-<span class="n">model2</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">),</span>
-              <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">BinaryCrossentropy</span><span class="p">(),</span>
-<span class="c1">#               metrics=[&#39;binary_accuracy&#39;],</span>
-              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">),</span>
+                  <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">BinaryCrossentropy</span><span class="p">(),</span>
+    <span class="c1">#               metrics=[&#39;binary_accuracy&#39;],</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
 </pre></div>
 
      </div>
@@ -15307,11 +15410,12 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[80]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------model2-----------&quot;</span><span class="p">)</span>    
-<span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">EB4_X_train</span><span class="p">,</span> <span class="n">EB4_y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>   
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">eb4_nn_model</span> <span class="o">=</span> <span class="n">KerasClassifier</span><span class="p">(</span><span class="n">build_fn</span><span class="o">=</span><span class="n">create_model</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">eb4_nn_model</span><span class="o">.</span><span class="n">_estimator_type</span> <span class="o">=</span> <span class="s2">&quot;classifier&quot;</span>
+<span class="n">eb4_nn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">EB4_X_train</span><span class="p">,</span> <span class="n">EB4_y_train</span><span class="p">)</span> 
 </pre></div>
 
      </div>
@@ -15333,27 +15437,7 @@ model1.fit(EB7_X_train, EB7_y_train,batch_size=batch_size,epochs=10)</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>------model2-----------
-Epoch 1/10
-88/88 [==============================] - 1s 4ms/step - loss: 0.2188 - accuracy: 0.9502
-Epoch 2/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0552 - accuracy: 0.9971
-Epoch 3/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0338 - accuracy: 0.9972
-Epoch 4/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0252 - accuracy: 0.9973
-Epoch 5/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0201 - accuracy: 0.9976
-Epoch 6/10
-88/88 [==============================] - 0s 3ms/step - loss: 0.0176 - accuracy: 0.9976
-Epoch 7/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0157 - accuracy: 0.9974
-Epoch 8/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0144 - accuracy: 0.9977
-Epoch 9/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0139 - accuracy: 0.9973
-Epoch 10/10
-88/88 [==============================] - 0s 2ms/step - loss: 0.0123 - accuracy: 0.9979
+<pre>Epoch 1/10
 </pre>
 </div>
 </div>
@@ -15361,13 +15445,57 @@ Epoch 10/10
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/var/folders/yv/s4flsz3j48qbnmr0r8hsb2480000gn/T/ipykernel_83980/2802605287.py:1: DeprecationWarning: KerasClassifier is deprecated, use Sci-Keras (https://github.com/adriangb/scikeras) instead. See https://www.adriangb.com/scikeras/stable/migration.html for help migrating.
+  eb4_nn_model = KerasClassifier(build_fn=create_model,verbose=1,epochs=10,batch_size=256)
+2022-05-12 21:30:03.292576: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:113] Plugin optimizer for device_type GPU is enabled.
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>88/88 [==============================] - 1s 6ms/step - loss: 0.2169 - accuracy: 0.9552
+Epoch 2/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0554 - accuracy: 0.9970
+Epoch 3/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0343 - accuracy: 0.9972
+Epoch 4/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0254 - accuracy: 0.9974
+Epoch 5/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0210 - accuracy: 0.9975
+Epoch 6/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0179 - accuracy: 0.9973
+Epoch 7/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0161 - accuracy: 0.9975
+Epoch 8/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0150 - accuracy: 0.9974
+Epoch 9/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0134 - accuracy: 0.9977
+Epoch 10/10
+88/88 [==============================] - 0s 5ms/step - loss: 0.0125 - accuracy: 0.9976
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[80]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7f589c68c790&gt;</pre>
+<pre>&lt;keras.callbacks.History at 0x2d6aaccd0&gt;</pre>
 </div>
 
 </div>
@@ -15381,17 +15509,17 @@ Epoch 10/10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[81]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---------model2-----</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">nn_pred2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">EB4_X_val</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nn_pred2</span> <span class="o">=</span> <span class="n">eb4_nn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">EB4_X_val</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="n">nn_pred2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">EB4_y_val</span><span class="p">,</span> <span class="n">nn_pred2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">log_loss</span><span class="p">(</span><span class="n">EB4_y_val</span><span class="p">,</span> <span class="n">nn_pred2</span><span class="p">))</span>
 
 
-<span class="n">test_preds_nn2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_EB4_ns</span><span class="p">)</span>
+<span class="n">test_preds_nn2</span> <span class="o">=</span> <span class="n">eb4_nn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_EB4_ns</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">test_preds_nn2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
@@ -15413,12 +15541,22 @@ Epoch 10/10
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>---------model2-----
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>2022-05-12 21:30:11.654015: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:113] Plugin optimizer for device_type GPU is enabled.
+</pre>
+</div>
+</div>
 
-(2500, 1)
-0.9999628797861876
-0.010230590942026356
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>(2500, 1)
+0.9980009484854633
+0.06907819246776652
 (12500, 1)
 </pre>
 </div>
@@ -15433,7 +15571,7 @@ Epoch 10/10
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[82]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#逻辑回归模型</span>
@@ -15539,9 +15677,9 @@ Epoch 10/10
 
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_seed</span><span class="p">):</span>
     <span class="n">xgb_params2</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">j</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">154</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">xgb_params2</span><span class="p">,</span> <span class="n">dtrain2</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">val_preds_xgb_2</span> <span class="o">+=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dval2</span><span class="p">)</span><span class="o">/</span><span class="n">n_seed</span>
-    <span class="n">test_preds_xgb_2</span> <span class="o">+=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest2</span><span class="p">)</span><span class="o">/</span><span class="n">n_seed</span>
+    <span class="n">eb4_xgb_model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">xgb_params2</span><span class="p">,</span> <span class="n">dtrain2</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">val_preds_xgb_2</span> <span class="o">+=</span> <span class="n">eb4_xgb_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dval2</span><span class="p">)</span><span class="o">/</span><span class="n">n_seed</span>
+    <span class="n">test_preds_xgb_2</span> <span class="o">+=</span> <span class="n">eb4_xgb_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest2</span><span class="p">)</span><span class="o">/</span><span class="n">n_seed</span>
 
 <span class="c1">#输出指标</span>
 <span class="c1">#使用非加权的结果</span>
@@ -15595,41 +15733,7 @@ Epoch 10/10
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="%E7%BB%93%E6%9E%9C%E7%94%9F%E6%88%90">&#32467;&#26524;&#29983;&#25104;<a class="anchor-link" href="#%E7%BB%93%E6%9E%9C%E7%94%9F%E6%88%90">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 查看三种模型的形状以便于组合集成</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_preds_xgb_1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_preds_xgb_2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_preds_EB7_lr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_preds_EB4_lr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="c1"># print(test_preds_nn1[0].shape)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_preds_nn1</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_preds_nn2</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="%E5%8D%95%E4%B8%80%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#21333;&#19968;&#27169;&#22411;&#21442;&#25968;&#36941;&#21382;<a class="anchor-link" href="#%E5%8D%95%E4%B8%80%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#182;</a></h2>
+<h2 id="%E4%BA%BA%E5%B7%A5%E6%89%8B%E5%8A%A8%E9%9B%86%E6%88%90%E7%BB%93%E6%9E%9C(%E8%B2%8C%E4%BC%BC%E6%95%88%E6%9E%9C%E7%A8%8D%E5%BE%AE%E5%A5%BD%E4%B8%80%E7%82%B9)">&#20154;&#24037;&#25163;&#21160;&#38598;&#25104;&#32467;&#26524;(&#35980;&#20284;&#25928;&#26524;&#31245;&#24494;&#22909;&#19968;&#28857;)<a class="anchor-link" href="#%E4%BA%BA%E5%B7%A5%E6%89%8B%E5%8A%A8%E9%9B%86%E6%88%90%E7%BB%93%E6%9E%9C(%E8%B2%8C%E4%BC%BC%E6%95%88%E6%9E%9C%E7%A8%8D%E5%BE%AE%E5%A5%BD%E4%B8%80%E7%82%B9)">&#182;</a></h2><h3 id="%E5%8D%95%E4%B8%80%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#21333;&#19968;&#27169;&#22411;&#21442;&#25968;&#36941;&#21382;<a class="anchor-link" href="#%E5%8D%95%E4%B8%80%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15805,7 +15909,7 @@ round: 23
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#20004;&#31181;&#27169;&#22411;&#32452;&#21512;&#21442;&#25968;&#36941;&#21382;<a class="anchor-link" href="#%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#182;</a></h2>
+<h3 id="%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#20004;&#31181;&#27169;&#22411;&#32452;&#21512;&#21442;&#25968;&#36941;&#21382;<a class="anchor-link" href="#%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E5%8F%82%E6%95%B0%E9%81%8D%E5%8E%86">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15816,7 +15920,7 @@ round: 23
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="xgboost-+-logistic_regression%E6%96%B9%E5%BC%8F">xgboost + logistic_regression&#26041;&#24335;<a class="anchor-link" href="#xgboost-+-logistic_regression%E6%96%B9%E5%BC%8F">&#182;</a></h3>
+<h4 id="xgboost-+-logistic_regression%E6%96%B9%E5%BC%8F">xgboost + logistic_regression&#26041;&#24335;<a class="anchor-link" href="#xgboost-+-logistic_regression%E6%96%B9%E5%BC%8F">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -15940,7 +16044,7 @@ round: 23
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="xgboost-+-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%96%B9%E5%BC%8F">xgboost + &#31070;&#32463;&#32593;&#32476;&#26041;&#24335;<a class="anchor-link" href="#xgboost-+-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%96%B9%E5%BC%8F">&#182;</a></h3>
+<h4 id="xgboost-+-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%96%B9%E5%BC%8F">xgboost + &#31070;&#32463;&#32593;&#32476;&#26041;&#24335;<a class="anchor-link" href="#xgboost-+-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%96%B9%E5%BC%8F">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -16022,7 +16126,7 @@ round: 23
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E7%9A%84%E6%96%B9%E5%BC%8F">&#19977;&#31181;&#27169;&#22411;&#32452;&#21512;&#30340;&#26041;&#24335;<a class="anchor-link" href="#%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E7%9A%84%E6%96%B9%E5%BC%8F">&#182;</a></h2>
+<h3 id="%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E7%9A%84%E6%96%B9%E5%BC%8F">&#19977;&#31181;&#27169;&#22411;&#32452;&#21512;&#30340;&#26041;&#24335;<a class="anchor-link" href="#%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88%E7%9A%84%E6%96%B9%E5%BC%8F">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -16045,18 +16149,7 @@ round: 23
     <span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9998].shape)</span>
     <span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9989].shape)</span>
     <span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9987].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9984].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9983].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9982].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0011].shape,subs[subs &gt; 0.9981].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0012].shape,subs[subs &gt; 0.9980].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0013].shape,subs[subs &gt; 0.9979].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0014].shape,subs[subs &gt; 0.9978].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0015].shape,subs[subs &gt; 0.9977].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0016].shape,subs[subs &gt; 0.9976].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0017].shape,subs[subs &gt; 0.9975].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0018].shape,subs[subs &gt; 0.9974].shape)</span>
-    <span class="c1"># print(subs[subs &lt; 0.0019].shape,subs[subs &gt; 0.9973].shape)</span>
+  
     
 <span class="c1">#     subs[subs &gt; 0.9984] = 1</span>
 <span class="c1">#     # # subs[subs &gt; 0.9974] = 1</span>
@@ -16065,6 +16158,187 @@ round: 23
     <span class="n">sample_submission</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subs</span>
     <span class="n">sample_submission</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;submission_xgb_lr_new_</span><span class="si">{}</span><span class="s1">.csv&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">sample_submission</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="%E5%BC%95%E5%85%A5sklearn%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9D%97">&#24341;&#20837;sklearn&#38598;&#25104;&#23398;&#20064;&#27169;&#22359;<a class="anchor-link" href="#%E5%BC%95%E5%85%A5sklearn%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9D%97">&#182;</a></h2><ul>
+<li>Adaboost/Cagging: 基分类的效果可能还行，导致对于模型中每一种的集成实验效果都相当一般，没有重大改进</li>
+<li>VotingClassifier: 效果好像也挺一般的，而且由于结果在边缘上的分布极其接近0和1，这与单一分类模型的结果有着明显的不同（可能需要进一步研究），使得在其区间裁减基本上没有任何效果。因此没有进一步实验stackingclassifier</li>
+<li>StackingClassifier:</li>
+<li>GridSearchCV: 太消耗时间了，不搜索了</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[83]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for eb7</span>
+<span class="n">eclf1</span> <span class="o">=</span> <span class="n">VotingClassifier</span><span class="p">(</span><span class="n">estimators</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;nn&#39;</span><span class="p">,</span> <span class="n">eb7_nn_model</span><span class="p">),(</span><span class="s1">&#39;lr&#39;</span><span class="p">,</span> <span class="n">EB7_lr</span><span class="p">),(</span><span class="s1">&#39;xgb&#39;</span><span class="p">,</span><span class="n">eb7_xgb_model</span><span class="p">)],</span> 
+                         <span class="n">voting</span><span class="o">=</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+                        <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">eclf1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">EB7_X_train</span><span class="p">,</span><span class="n">EB7_y_train</span><span class="p">,)</span> 
+<span class="c1"># for eb4</span>
+<span class="n">eclf2</span> <span class="o">=</span> <span class="n">VotingClassifier</span><span class="p">(</span><span class="n">estimators</span><span class="o">=</span><span class="p">[</span> <span class="p">(</span><span class="s1">&#39;nn&#39;</span><span class="p">,</span> <span class="n">eb4_nn_model</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;lr&#39;</span><span class="p">,</span> <span class="n">EB4_lr</span><span class="p">),(</span><span class="s1">&#39;xgb&#39;</span><span class="p">,</span><span class="n">eb4_xgb_model</span><span class="p">)],</span> 
+                         <span class="n">voting</span><span class="o">=</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+                        <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">eclf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_EB4_ns</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Epoch 1/20
+ 1/88 [..............................] - ETA: 25s - loss: 0.6877 - accuracy: 0.5586</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>2022-05-12 21:30:49.341500: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:113] Plugin optimizer for device_type GPU is enabled.
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>88/88 [==============================] - 1s 6ms/step - loss: 0.1935 - accuracy: 0.9768
+Epoch 2/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0471 - accuracy: 0.9981
+Epoch 3/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0280 - accuracy: 0.9977
+Epoch 4/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0204 - accuracy: 0.9981
+Epoch 5/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0164 - accuracy: 0.9981
+Epoch 6/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0140 - accuracy: 0.9983
+Epoch 7/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0123 - accuracy: 0.9983
+Epoch 8/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0111 - accuracy: 0.9982
+Epoch 9/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0101 - accuracy: 0.9982
+Epoch 10/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0097 - accuracy: 0.9982
+Epoch 11/20
+88/88 [==============================] - 0s 6ms/step - loss: 0.0089 - accuracy: 0.9984
+Epoch 12/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0084 - accuracy: 0.9982
+Epoch 13/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0081 - accuracy: 0.9985
+Epoch 14/20
+88/88 [==============================] - 1s 6ms/step - loss: 0.0074 - accuracy: 0.9987
+Epoch 15/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0074 - accuracy: 0.9984
+Epoch 16/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0071 - accuracy: 0.9986
+Epoch 17/20
+88/88 [==============================] - 0s 6ms/step - loss: 0.0067 - accuracy: 0.9987
+Epoch 18/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0066 - accuracy: 0.9983
+Epoch 19/20
+88/88 [==============================] - 0s 6ms/step - loss: 0.0060 - accuracy: 0.9988
+Epoch 20/20
+88/88 [==============================] - 0s 5ms/step - loss: 0.0065 - accuracy: 0.9985
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[83]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>VotingClassifier(estimators=[(&#39;lr&#39;,
+                              LogisticRegression(C=0.026, max_iter=10000)),
+                             (&#39;nn&#39;,
+                              &lt;keras.wrappers.scikit_learn.KerasClassifier object at 0x2f47af1f0&gt;)],
+                 voting=&#39;soft&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[95]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 对两种不同模型预测进行 $alpha*model1_predict+(1-alpha)*model2_predict$</span>
+
+<span class="n">test_pred_ensemble1</span> <span class="o">=</span> <span class="n">eclf1</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_EB7_ns</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">test_pred_ensemble2</span> <span class="o">=</span> <span class="n">eclf2</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_EB4_ns</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">sample_submission</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ids</span>
+<span class="n">subs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">1.1</span><span class="o">*</span><span class="n">test_pred_ensemble1</span><span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">test_pred_ensemble2</span><span class="p">,</span>
+               <span class="mf">0.0018</span><span class="p">,</span> 
+                <span class="mf">0.9974</span><span class="p">)</span>
+<span class="c1">#测试预测裁减的范围</span>
+<span class="c1"># print(subs[subs &lt; 0.0008].shape,subs[subs &gt; 0.9984].shape) </span>
+<span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9998].shape)</span>
+<span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9989].shape)</span>
+<span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9987].shape)</span>
+<span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9984].shape)</span>
+<span class="c1"># print(subs[subs &lt; 0.0010].shape,subs[subs &gt; 0.9983].shape)</span>
+
+
+<span class="n">sample_submission</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subs</span>
+<span class="n">sample_submission</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;submission_ensemble3.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">sample_submission</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
      </div>
