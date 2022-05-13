@@ -1,6 +1,8 @@
 # directory
-cats_and_dogs
-train
-test
-pretrained_model
+cats_and_dogs/
+train/
+test/
+pretrained_model/
+
+# file
 .DS_Store
