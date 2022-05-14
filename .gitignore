@@ -10,6 +10,11 @@ cats_and_dogs/
 train1/
 test1/
 
+# intermediate generated files/dirs
+.ipynb_checkpoints/
+
 # file
 .DS_Store
 main.py
+
+
